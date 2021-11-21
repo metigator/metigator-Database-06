@@ -1,0 +1,40 @@
+CREATE DATABASE [DBFG]
+ON PRIMARY
+(
+  NAME = N'DBFG',
+  FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\DBFG.mdf',
+  SIZE = 4096KB, FILEGROWTH = 1024KB
+),
+(
+  NAME = N'DBFG_1',
+  FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\DBFG_1.ndf',
+  SIZE = 4096KB,  FILEGROWTH = 1024KB
+)
+
+LOG ON
+(
+  NAME = N'DBFG_log',
+  FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\DBFG_log.ldf',
+  SIZE = 1024KB, FILEGROWTH = 10%
+)
+GO
+
+Select * from sys.filegroups;
+
+ALTER DATABASE [DBFG] ADD FILEGROUP [SECFG];
+GO
+
+ALTER DATABASE [DBFG]
+ADD FILE
+(
+  NAME = N'test_1',
+  FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\test_1.ndf',
+  SIZE = 1024KB, FILEGROWTH = 10%
+),
+(
+  NAME = N'test_2',
+  FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\test_2.ndf',
+  SIZE = 1024KB, FILEGROWTH = 10%
+)
+TO FILEGROUP [SECFG];
+ 
